@@ -1,0 +1,19 @@
+.logo {
+    padding: 30px 0;
+}
+.sans {font-family: sans-serif;
+}
+.inline {
+    display: inline-block;
+}
+.twhite {
+    color: white;
+}
+.h {
+    height: 500px;
+}
+.bold {
+    font-weight: bold;
+    font-size: 50px;
+    font-family: sans-serif;
+}

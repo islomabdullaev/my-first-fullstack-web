@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/carousel/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/carousel/owl.theme.default.min.css' %}" type="text/css">
+</head>
+<div class="log bg-dark text-right">
+    <a style="color: whitesmoke" href="#" class="navbar-brand">Log out</a>
+    <a style="color: whitesmoke" href="#" class="navbar-brand">History</a>
+</div>
+<nav class="navbar navbar-light bg-light">
+    <div class="container">
+        <img src="{% static 'images/apple_icon.png' %}" alt="" height="85px" width="85px">
+        <a href="{% url 'products:home' %}" class="navbar-brand">Home</a>
+        <a href="{% url 'products:products' %}" class="navbar-brand">Products</a>
+        <a href="{% url 'products:blog' %}" class="navbar-brand">Blog</a>
+        <a href="{% url 'products:about' %}" class="navbar-brand">About</a>
+        <a href="{% url 'products:contact' %}" class="navbar-brand">Contact</a>
+        <div>
+            <a class="pr-2" href="{% url 'products:wishlist' %}"><i class="fa fa-heart"></i></a>
+            <a class="pr-1" href=""><i class="fa fa-shopping-bag"></i></a><span>$0.00</span>
+        </div>
+    </div>
+</nav>
+</html>
+
