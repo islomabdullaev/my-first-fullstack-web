@@ -3,7 +3,7 @@
 {% block content %}
     <div style="background-color: whitesmoke !important;" id="about-title" class="bg-dark p-5">
         <div class="container p-5">
-            <div class="about-us">
+            <div class="about-us text-center">
                 <h1 style="font-weight: bold; font-size: 50px; font-family: sans-serif;">About Us</h1>
             </div>
         </div>
@@ -64,14 +64,15 @@
                 <div class="col-6">
                     <h1 style="font-weight: bold; font-size: 50px; font-family: sans-serif">Leave Us Something Or Call
                         Right Now...</h1>
-                    <form action="">
+                    <form method="POST">
+                        {% csrf_token %}
                     <textarea style="border: 5px solid darkgray; height: 200px"
                               class="form-control pt-5 pb-5 mt-5 w-100"
-                              placeholder="Message" name="about-message"></textarea>
+                              placeholder="Message" name="about_message"></textarea>
                         <input style="border: 5px solid darkgray" class="form-control mt-2 mb-2 pt-4 pb-4"
                                placeholder="@Email"
-                               type="text" name="about-email">
-                        <button style="background-color: darkgray" type="button" class="btn">Send</button>
+                               type="text" name="about_email">
+                        <button style="background-color: darkgray" type="submit" class="btn">Send</button>
                     </form>
 
                 </div>

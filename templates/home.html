@@ -59,91 +59,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-4 mt-5">
+                    {% for i in object_list %}
                     <div class="card">
-                        <img class="card-img-top" src="{% static 'phones/iPhone-icon_preis.png' %}"
+                        <img class="card-img-top" src="{{ i.image.url }}"
                              alt="Card image cap">
                         <div class="card-body">
-                            <h3 class="card-title">Card title</h3>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of
-                                the
-                                card's content.</p>
+                            <h3 class="card-title">{{ i.title }}</h3>
+                            <p class="card-text">{{ i.short_description }}</p>
                             <a href="#" class="btn btn-primary">See details...</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-4 mt-5">
-                    <div class="card">
-                        <img class="card-img-top" src="{% static 'phones/iPhone-icon_preis.png' %}"
-                             alt="Card image cap">
-                        <div class="card-body">
-                            <h3 class="card-title">Card title</h3>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of
-                                the
-                                card's content.</p>
-                            <a href="#" class="btn btn-primary">See details...</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4 mt-5">
-                    <div class="card">
-                        <img class="card-img-top" src="{% static 'phones/iPhone-icon_preis.png' %}"
-                             alt="Card image cap">
-                        <div class="card-body">
-                            <h3 class="card-title">Card title</h3>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of
-                                the
-                                card's content.</p>
-                            <a href="#" class="btn btn-primary">See details...</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4 mt-5">
-                    <div class="card">
-                        <img class="card-img-top" src="{% static 'phones/iPhone-icon_preis.png' %}"
-                             alt="Card image cap">
-                        <div class="card-body">
-                            <h3 class="card-title">Card title</h3>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of
-                                the
-                                card's content.</p>
-                            <a href="#" class="btn btn-primary">See details...</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4 mt-5">
-                    <div class="card">
-                        <img class="card-img-top" src="{% static 'phones/iPhone-icon_preis.png' %}"
-                             alt="Card image cap">
-                        <div class="card-body">
-                            <h3 class="card-title">Card title</h3>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of
-                                the
-                                card's content.</p>
-                            <a href="#" class="btn btn-primary">See details...</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4 mt-5">
-                    <div class="card">
-                        <img class="card-img-top" src="{% static 'phones/iPhone-icon_preis.png' %}"
-                             alt="Card image cap">
-                        <div class="card-body">
-                            <h3 class="card-title">Card title</h3>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of
-                                the
-                                card's content.</p>
-                            <a href="#" class="btn btn-primary">See details...</a>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
-            <a href="{% url 'products:products' %}">
+            <a href="{% url 'home:page' %}">
                 <h1 class="text-center mt-5">See more...</h1>
             </a>
         </div>
@@ -176,9 +105,4 @@
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function () {
-            $(".owl-carousel").owlCarousel();
-        });
-    </script>
 {% endblock %}

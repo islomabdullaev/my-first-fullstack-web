@@ -1,31 +1,42 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Header</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'css/carousel/owl.carousel.min.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'css/carousel/owl.theme.default.min.css' %}" type="text/css">
+    <title>Apple.com</title>
+    <link rel="icon" href="{% static 'images/apple_icon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<div class="log bg-dark text-right">
-    <a style="color: whitesmoke" href="#" class="navbar-brand">Log out</a>
-    <a style="color: whitesmoke" href="#" class="navbar-brand">History</a>
+<div class="text-right bg-dark">
+    {% if request.user.is_authenticated %}
+        <p class="text-center text-white">Welcome {{ user.username }} !</p>
+        <p class="text-white text-center">Thank you !</p>
+        <a style="color: whitesmoke" href="{% url "logout" %}" class="navbar-brand">Log Out</a>
+        <a style="color: whitesmoke" href="#" class="navbar-brand">History</a>
+    {% else %}
+        <p class="text-white">You are not logged in as our client ! pls login</p>
+        <a style="color: whitesmoke" href="{% url 'login' %}" class="navbar-brand">Log In</a>
+        <a style="color: whitesmoke" href="{% url 'signup' %}" class="navbar-brand">Sign Up</a>
+    {% endif %}
+    <a style="color: whitesmoke" href="#" class="navbar-brand">EN</a>
 </div>
 <nav class="navbar navbar-light bg-light">
     <div class="container">
         <img src="{% static 'images/apple_icon.png' %}" alt="" height="85px" width="85px">
-        <a href="{% url 'products:home' %}" class="navbar-brand">Home</a>
-        <a href="{% url 'products:products' %}" class="navbar-brand">Products</a>
-        <a href="{% url 'products:blog' %}" class="navbar-brand">Blog</a>
-        <a href="{% url 'products:about' %}" class="navbar-brand">About</a>
-        <a href="{% url 'products:contact' %}" class="navbar-brand">Contact</a>
+        <a href="{% url 'home:page' %}" class="navbar-brand">Home</a>
+        <a href="{% url 'products:page' %}" class="navbar-brand">Products</a>
+        <a href="{% url 'blog:page' %}" class="navbar-brand">Blog</a>
+        <a href="{% url 'contact:about-us' %}" class="navbar-brand">About</a>
+        <a href="{% url 'contact:contact' %}" class="navbar-brand">Contact</a>
         <div>
-            <a class="pr-2" href="{% url 'products:wishlist' %}"><i class="fa fa-heart"></i></a>
-            <a class="pr-1" href=""><i class="fa fa-shopping-bag"></i></a><span>$0.00</span>
+            <a class="heart pr-2" href="#"><i class="bi-heart"></i></a>
+            <a class="bag pr-1" href=""><i class="bi-bag"></i></a><span> 0</span><span> $0.00</span>
         </div>
     </div>
 </nav>
 </html>
-

@@ -1,0 +1,10 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+    <div class="container text-center mt-5 mb-5">
+    <h1 class="text-danger">Log In</h1>
+    <form method="POST">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Log in</button>
+    </form>
+    </div>
+{% endblock %}

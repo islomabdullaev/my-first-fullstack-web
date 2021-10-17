@@ -1,6 +1,17 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
 {% block content %}
+    <style>
+        a:hover {
+            cursor: pointer;
+        }
+
+        body a {
+            text-decoration: none !important;
+        }
+    </style>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
     <div id="products-banner" class="mb-5">
         <img src="{% static 'images/banner-3.jpeg' %}" alt="" width="100%" height="100%">
     </div>
@@ -12,193 +23,127 @@
     <br>
     <div id="product_items" class="bg-light">
         <div class="container mb-5">
-            <form style="justify-content: center" class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+            <form style="justify-content: center" class="form-inline w-25">
+                <input class="form-control mr-sm-2" value="{{ request.GET.q }}" name="q" type="search"
+                       placeholder="Search"
+                       aria-label="Search">
+                <button class="btn btn-outline-dark my-2 mb-2" type="submit">Search</button>
             </form>
+            <a href="{% url 'products:page' %}">Clear filters</a>
         </div>
         {#        < -- Categories -- >#}
         <div class="container">
             <div class="row">
-                <div class="col-4">
-                    <h2>Products</h2>
-                    <ol>
-                        <li><a href="">Phones</a></li>
-                        <li><a href="">Computers</a></li>
-                        <li><a href="">Watches</a></li>
-                        <li><a href="">Air Pods</a>
-                    </ol>
+                <div class="col-3">
+                    <h2>Categories</h2>
+                    {% for category in categories %}
+                        <ol>
+                            <li><a onclick="addUrlParameter('cat', {{ category.pk }})">{{ category.title }}</a></li>
+                        </ol>
+                    {% endfor %}
                 </div>
-                <div class="col-4">
-                    <h2>Products</h2>
-                    <ol>
-                        <li><a href="">Phones</a></li>
-                        <li><a href="">Computers</a></li>
-                        <li><a href="">Watches</a></li>
-                        <li><a href="">Air Pods</a>
-                    </ol>
+                <div class="col-3">
+                    <h2>Colors</h2>
+                    {% for color in colors %}
+                        <ol>
+                            <li><a onclick="addUrlParameter('color', {{ color.pk }})">{{ color.title }}</a></li>
+                        </ol>
+                    {% endfor %}
                 </div>
-                <div class="col-4">
-                    <h2>Products</h2>
-                    <ol>
-                        <li><a href="">Phones</a></li>
-                        <li><a href="">Computers</a></li>
-                        <li><a href="">Watches</a></li>
-                        <li><a href="">Air Pods</a>
-                    </ol>
+                <div class="col-3">
+                    <h2>Tags</h2>
+                    {% for tag in tags %}
+                        <ol>
+                            <li><a onclick="addUrlParameter('tag', {{ tag.pk }})"> {{ tag.title }}</a></li>
+                        </ol>
+                    {% endfor %}
+                </div>
+                <div class="col-3">
+                    <h2>Price</h2>
+                    <form action="">
+                        <input type="text" class="js-range-slider" name="my_range" value=""/>
+                    </form>
                 </div>
             </div>
         </div>
         <hr>
-
         <div class="container container-fluid mt-5">
             <div class="row">
                 <div class="col-8">
                     <h3>Showing 1–12 of 126 results</h3>
                 </div>
-                <div class="col-4">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown button
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="row mt-5">
-                <div class="col-4 pb-5">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="{% static 'images/products.jpg' %}" alt="Card image cap">
-                        <div class="card-body">
-                            <h3 class="card-title">Product title</h3>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item bold">$250</li>
-                        </ul>
-                        <div class="card-body">
-                            <a href="#" class="card-link"><i class="fa fa-heart"></i></a>
-                            <a href="#" class="card-link"><i class="fa fa-shopping-basket"></i></a>
-                            <a href="#" class="card-link"><i class="fa fa-star"></i> 7 </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4 pb-5">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="{% static 'images/products.jpg' %}" alt="Card image cap">
-                        <div class="card-body">
-                            <h3 class="card-title">Product title</h3>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item bold">$250</li>
-                        </ul>
-                        <div class="card-body">
-                            <a href="#" class="card-link"><i class="fa fa-heart"></i></a>
-                            <a href="#" class="card-link"><i class="fa fa-shopping-basket"></i></a>
-                            <a href="#" class="card-link"><i class="fa fa-star"></i> 7 </a>
+                {% for i in productmodel_list %}
+                    <div class="col-4 pb-5">
+                        <div class="card" style="width: 18rem; height: 100%">
+                            <img class="card-img-top" src="{{ i.image.url }}" alt="Card image cap" width="100%"
+                                 height="100%">
+                            <div class="card-body">
+                                <a href="{% url 'products:product_detail' pk=i.pk %}" class="card-title">{{ i.title }}</a>
+                                <p class="card-text">{{ i.short_description }}</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bold">${{ i.price }} %<span
+                                        class="text-danger">{{ i.discount }}</span></li>
+                            </ul>
+                            <div class="card-body">
+                                <a href="#" class="heart card-link"><i class="bi-heart"></i></a>
+                                <a href="#" class="card-link"><i class="bi-cart-plus"></i></a>
+                                <a href="#" class="card-link"><i class="bi-star"></i></a><span
+                                    class="bold">{{ i.rate }}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-4 pb-5">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="{% static 'images/products.jpg' %}" alt="Card image cap">
-                        <div class="card-body">
-                            <h3 class="card-title">Product title</h3>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item bold">$250</li>
-                        </ul>
-                        <div class="card-body">
-                            <a href="#" class="card-link"><i class="fa fa-heart"></i></a>
-                            <a href="#" class="card-link"><i class="fa fa-shopping-basket"></i></a>
-                            <a href="#" class="card-link"><i class="fa fa-star"></i> 7 </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4 pb-5">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="{% static 'images/products.jpg' %}" alt="Card image cap">
-                        <div class="card-body">
-                            <h3 class="card-title">Product title</h3>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item bold">$250</li>
-                        </ul>
-                        <div class="card-body">
-                            <a href="#" class="card-link"><i class="fa fa-heart"></i></a>
-                            <a href="#" class="card-link"><i class="fa fa-shopping-basket"></i></a>
-                            <a href="#" class="card-link"><i class="fa fa-star"></i> 7 </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4 pb-5">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="{% static 'images/products.jpg' %}" alt="Card image cap">
-                        <div class="card-body">
-                            <h3 class="card-title">Product title</h3>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item bold">$250</li>
-                        </ul>
-                        <div class="card-body">
-                            <a href="#" class="card-link"><i class="fa fa-heart"></i></a>
-                            <a href="#" class="card-link"><i class="fa fa-shopping-basket"></i></a>
-                            <a href="#" class="card-link"><i class="fa fa-star"></i> 7 </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4 pb-5">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="{% static 'images/products.jpg' %}" alt="Card image cap">
-                        <div class="card-body">
-                            <h3 class="card-title">Product title</h3>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item bold">$250</li>
-                        </ul>
-                        <div class="card-body">
-                            <a href="#" class="card-link"><i class="fa fa-heart"></i></a>
-                            <a href="#" class="card-link"><i class="fa fa-shopping-basket"></i></a>
-                            <a href="#" class="card-link"><i class="fa fa-star"></i> 7 </a>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
-        <div class="container pb-5">
-            <div class="row center">
-                <div class="col-lg-12">
-                    <div class="product__pagination">
-                        <a class="active" href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <span>...</span>
-                        <a href="#">21</a>
-                    </div>
-                </div>
-            </div>
+        <div class="container justify-content-center mt-5 pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}"><i class="bi-chevron-double-left"></i></a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"><i class="bi-chevron-double-right"></i></a>
+        {% endif %}
+    </span>
         </div>
     </div>
+{% endblock %}
+{% block extra_js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>\
+
     <script>
-        $('.dropdown-toggle').dropdown()
-        $('#myDropdown').on('show.bs.dropdown', function () {
-            // do something…
-        })
+        $(".js-range-slider").ionRangeSlider();
+    </script>
+    <script>
+        $(".js-range-slider").ionRangeSlider({
+            type: "double",
+            min: 0,
+            max: 1000,
+            from: 200,
+            to: 500,
+            grid: true
+        });
+    </script>
+    <script> // ?cat=1
+    function addUrlParameter(name, value) {
+        let searchParams = new URLSearchParams(window.location.search)
+        if (['category', 'color', 'tag', 'price'].includes(name)) {
+            searchParams.delete('page');
+        }
+        if (searchParams.has(name) && searchParams.get(name) == value) {
+            searchParams.delete(name);
+        } else {
+            searchParams.set(name, value)
+        }
+        window.location.search = searchParams.toString()
+    }
     </script>
 {% endblock %}

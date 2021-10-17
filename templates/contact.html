@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html' %}
 {% block content %}
-    <div style="background-color: ghostwhite" id="about-title" class="p-5">
+    <div style="background-color: ghostwhite" id="about-title" class="p-5 mt-5">
         <div class="container p-5">
             <h1 style="font-weight: bold; font-size: 50px; font-family: sans-serif;">Contact Us</h1>
         </div>
@@ -9,22 +9,29 @@
         <div class="container  pt-5 pb-5 border bg-light">
             <div class="row">
                 <div class="col-md-12">
-                    <form class="main_form_data">
+                    <form action="" method="POST">
+                        {% csrf_token %}
                         <div class="row p-5 ">
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                <input style="border: 5px solid red;" class="form-control pt-4 pb-4" placeholder="Your name" type="text" name="Your Name">
+                                <input name="name" style="border: 5px solid red;" class="form-control pt-4 pb-4"
+                                       placeholder="Your name" type="text">
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                <input style="border: 5px solid red" class="form-control pt-4 pb-4" placeholder="Email" type="text" name="Email">
+                                <input name="email" style="border: 5px solid red" class="form-control pt-4 pb-4" placeholder="Email"
+                                       type="text">
                             </div>
                             <div class="col-md-12">
-                                <input style="border: 5px solid red" class="form-control mt-5 pt-4 pb-4" placeholder="Phone" type="text" name="Phone">
+                                <input name="phone" style="border: 5px solid red" class="form-control mt-5 pt-4 pb-4"
+                                       placeholder="Phone" type="text">
                             </div>
                             <div class="col-md-12">
-                                <textarea style="border: 5px solid red" class="form-control pt-5 pb-5 mt-5 w-100" placeholder="Message" name="message"></textarea>
+                                <textarea name="message" style="border: 5px solid red" class="form-control pt-5 pb-5 mt-5 w-100"
+                                          placeholder="Message"></textarea>
                             </div>
                             <div class=" col-md-12">
-                                <button style="background-color: black" class="send mt-5 p-3 w-25 text-white ">Save</button>
+                                <button type="submit" style="background-color: black"
+                                        class="send mt-5 p-3 w-25 text-white ">Save
+                                </button>
                             </div>
                         </div>
                     </form>

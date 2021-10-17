@@ -1,4 +1,65 @@
 {% extends 'layouts/base.html' %}
 {% block content %}
-    <h1>Details of the product</h1>
+    <div class="container">
+        <h1 style="font-weight: bold; font-size: 50px; font-family: sans-serif;">About {{ product.title }}</h1>
+        <div class="row">
+            <div class="col-6"><img src="{{ product.image.url }}" alt="product-image" class="img-thumbnail"></div>
+            <div class="col-6">
+                <h1>Model: {{ product.title }}</h1>
+                <p>Short description: {{ product.short_description }}</p>
+                <h3>Description</h3>
+                <p>{{ product.long_description }}</p>
+                <p class="mr-5">Type: {{ product.category }}</p>
+                <p>Color: {{ product.color.name }}</p>
+                <p>Price: {{ product.price }}</p>
+            </div>
+        </div>
+        <div class="related-products bg-light">
+            <h3 class="mt-5">Related Products</h3>
+             <div class="row mt-5 mb-5">
+            <div class="col-3">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+    </div>
+
 {% endblock %}

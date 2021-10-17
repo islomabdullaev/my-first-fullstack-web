@@ -1,9 +1,8 @@
 {% load static %}
 {% include 'layouts/header.html' %}
-<body>
-{% block content %}
-{% endblock %}
-<style>
+{% block extra_css %}
+    <style>
+
     html,
     body {
         height: 100%;
@@ -59,7 +58,7 @@
         text-align: center;
     }
 
-    .heart a:hover {
+    .heart :hover {
         color: red;
     }
 
@@ -79,20 +78,40 @@
         padding-left: 10px;
         padding-right: 15px;
     }
+
     #blog-page h1 {
         color: orange;
         padding-top: 15%;
         padding-bottom: 15%;
-        background-image: url({% static 'images/blogg.jpg' %});
+        font-weight: bold;
+        font-size: 100px;
+        font-family: sans-serif;
+        background-image: url({% static 'images/blogg.jpg'%})
     }
+
     .carousel-inner img {
         height: 1000px !important;
     }
     .bold {
-        font-size: 25px;
+        font-size: 20px;
+    }
+    #hint_id_username, #hint_id_password1, #hint_id_password2 {
+        display: none;
     }
 </style>
-</body>
+{% endblock %}
+<body>
+{% block content %}
+{% endblock %}
 {% include "layouts/footer.html" %}
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
 <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script>
+    $('#myCarousel').on('slide.bs.carousel', function () {
+        // do something…
+    })
+</script>
+{% block extra_js %}
+{% endblock %}
+</body>
