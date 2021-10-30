@@ -1,7 +1,7 @@
 {% load static %}
 <footer class="bg-dark text-center text-white">
     <div class="bg-dark sans" style="background-color: rgba(0, 0, 0, 0.2);">
-        <h6>Want to find out more about <a href="">us</a> ?</h6>
+        <h6>Want to find out more about <a href="{% url 'contact:about-us' %}">us</a> ?</h6>
         <h6>Or call just to this number +998905810061 USA</h6>
     </div>
     <div class="bg-dark text-center p-3 sans" style="background-color: rgba(0, 0, 0, 0.2);">
@@ -9,5 +9,12 @@
         <a style="font-family: sans-serif" class="text-white sans" href="https://apple.com/">apple.com</a>
     </div>
     <!-- Copyright -->
-    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/jquery-' %}3.6.0.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.js' %}"></script>
+    <script src="{% static 'js/main.js' %}3.3.1.min.js"></script>
+    <script src="{% static 'js/jquery-' %}3.3.1.min.js"></script>
+    <script src="{% static 'js/jquery-' %}3.3.1.min.js"></script>
 </footer>
+

@@ -1,21 +1,21 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Min, Max
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import TemplateView, ListView, DetailView
 
 from products.models import CategoryModel, ColorModel, ProductTagModel, PriceFilterModel, ProductModel, WishlistModel
 
 
-class ProductTemplateView(ListView):
-    paginate_by = 3
+class ProductTemplateView(LoginRequiredMixin, ListView):
+    paginate_by = 6
     model = ProductModel
     template_name = "products.html"
 
     def get_context_data(self, **kwargs):
-        # Call the base implementation first to get the context
         context = super(ProductTemplateView, self).get_context_data(**kwargs)
-        # Create any data and add it to the context
         context['categories'] = CategoryModel.objects.all()
+        context['category_name'] = CategoryModel
         context['colors'] = ColorModel.objects.all()
         context['tags'] = ProductTagModel.objects.all()
         context['prices'] = PriceFilterModel.objects.all()
@@ -24,7 +24,7 @@ class ProductTemplateView(ListView):
         return context
 
     def get_queryset(self):
-        products = ProductModel.objects.order_by("-pk")[:6]
+        products = ProductModel.objects.order_by("category")
         q = self.request.GET.get("q")
         if q:
             products = ProductModel.objects.filter(title__icontains=q)
@@ -44,25 +44,45 @@ class ProductTemplateView(ListView):
         return products
 
 
-class HomeTemplateView(ListView):
-    model = ProductModel
-    template_name = "home.html"
-
-    def get_queryset(self):
-        products = ProductModel.objects.all()
-        return products
-
-
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
     model = ProductModel
     template_name = "product-detail.html"
     context_object_name = "product"
 
 
+class WishlistView(LoginRequiredMixin, ListView):
+    template_name = "wishlist.html"
+    context_object_name = "wishlist_products"
 
-# @login_required
-# def update_wishlist(request, pk):
-#     product = get_object_or_404(ProductModel, pk=pk)
-#     WishlistModel.add_or_delete(request.user, product)
-#
-#     return redirect(request.GET.get("next", "/"))
+    def get_queryset(self):
+        return ProductModel.objects.filter(wishlist__user=self.request.user)
+
+
+class CartListView(ListView):
+    template_name = 'cart.html'
+    context_object_name = 'cart_objects'
+
+    def get_queryset(self):
+        cart = self.request.session.get('cart', [])
+        return ProductModel.get_from_cart(cart)
+
+
+@login_required
+def update_wishlist(request, pk):
+    product = get_object_or_404(ProductModel, pk=pk)
+    WishlistModel.add_or_delete(request.user, product)
+
+    return redirect(request.GET.get("next", "/"))
+
+
+def update_cart(request, pk):
+    product = get_object_or_404(ProductModel, pk=pk)
+    cart = request.session.get("cart", [])
+    if product.pk in cart:
+        cart.remove(product.pk)
+    else:
+        cart.append(product.pk)
+    request.session["cart"] = cart
+    print(request.session["cart"])
+
+    return redirect(request.GET.get("next", "/"))

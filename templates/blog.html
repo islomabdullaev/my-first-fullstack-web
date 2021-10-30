@@ -1,8 +1,9 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
 {% block content %}
+
     <div id="blog-page">
-    <h1 class="text-center">Welcome to Blog page</h1>
+        <h1 class="text-center">Welcome to Blog page</h1>
     </div>
     <div style="background-color:lightgray" id="banner-main">
         <div class="container mb-5">
@@ -28,84 +29,22 @@
     <div id="products-blog">
         <div class="container">
             <div class="row">
-                <div class="col-4 mb-5">
-                    <div class="card">
-                        <img src="{% static 'images/banner-2.jpg' %}" alt="" width="100%" height="250px">
-                        <hr style="background-color: orange; padding-top: 5px">
-                        <i class="fa fa-calendar mb-2"><span> 21 February 2021</span></i>
-                        <p class="mb-2">By: Andrew</p>
-                        <a href="">
-                            <h3 style="color: slategray">Watch</h3>
-                        </a>
-                        <a href=""><p>View comments (15)</p></a>
-                        <a href=""><p>Read More ...</p></a>
+                {% for product in blog_products %}
+                    <div class="col-4 mb-5">
+                        <div class="a card">
+                            <img src="{{ product.image.url }}" alt="" width="100%" height="250px">
+                            <hr style="background-color: orange; padding-top: 5px">
+                            <i class="fa fa-calendar mb-2"><span>{{ product.created_at|date:"d F Y" }}</span></i>
+                            <p class="mb-2">By: {{ product.author.full_name }}</p>
+                            <a href="{% url 'blog:detail' pk=product.pk %}">
+                                <h3 style="color: slategray">{{ product.title }}</h3>
+                            </a>
+                            <a href="{% url 'blog:detail' pk=product.pk %}"><p>View comments
+                                ({{ product.comments.count }})</p></a>
+                            <a href="{% url 'blog:detail' pk=product.pk %}"><p>Read More ...</p></a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-4 mb-5">
-                    <div class="card">
-                        <img src="{% static 'images/banner-2.jpg' %}" alt="" width="100%" height="250px">
-                        <hr style="background-color: orange; padding-top: 5px">
-                        <i class="fa fa-calendar mb-2"><span> 21 February 2021</span></i>
-                        <p class="mb-2">By: Andrew</p>
-                        <a href="">
-                            <h3 style="color: slategray">Watch</h3>
-                        </a>
-                        <a href=""><p>View comments (15)</p></a>
-                        <a href=""><p>Read More ...</p></a>
-                    </div>
-                </div>
-                <div class="col-4 mb-5">
-                    <div class="card">
-                        <img src="{% static 'images/banner-2.jpg' %}" alt="" width="100%" height="250px">
-                        <hr style="background-color: orange; padding-top: 5px">
-                        <i class="fa fa-calendar mb-2"><span> 21 February 2021</span></i>
-                        <p class="mb-2">By: Andrew</p>
-                        <a href="">
-                            <h3 style="color: slategray">Watch</h3>
-                        </a>
-                        <a href=""><p>View comments (15)</p></a>
-                        <a href=""><p>Read More ...</p></a>
-                    </div>
-                </div>
-                <div class="col-4 mb-5">
-                    <div class="card">
-                        <img src="{% static 'images/banner-2.jpg' %}" alt="" width="100%" height="250px">
-                        <hr style="background-color: orange; padding-top: 5px">
-                        <i class="fa fa-calendar mb-2"><span> 21 February 2021</span></i>
-                        <p class="mb-2">By: Andrew</p>
-                        <a href="">
-                            <h3 style="color: slategray">Watch</h3>
-                        </a>
-                        <a href=""><p>View comments (15)</p></a>
-                        <a href=""><p>Read More ...</p></a>
-                    </div>
-                </div>
-                <div class="col-4 mb-5">
-                    <div class="card">
-                        <img src="{% static 'images/banner-2.jpg' %}" alt="" width="100%" height="250px">
-                        <hr style="background-color: orange; padding-top: 5px">
-                        <i class="fa fa-calendar mb-2"><span> 21 February 2021</span></i>
-                        <p class="mb-2">By: Andrew</p>
-                        <a href="">
-                            <h3 style="color: slategray">Watch</h3>
-                        </a>
-                        <a href=""><p>View comments (15)</p></a>
-                        <a href=""><p>Read More ...</p></a>
-                    </div>
-                </div>
-                <div class="col-4 mb-5">
-                    <div class="card">
-                        <img src="{% static 'images/banner-2.jpg' %}" alt="" width="100%" height="250px">
-                        <hr style="background-color: orange; padding-top: 5px">
-                        <i class="fa fa-calendar mb-2"><span> 21 February 2021</span></i>
-                        <p class="mb-2">By: Andrew</p>
-                        <a href="">
-                            <h3 style="color: slategray">Watch</h3>
-                        </a>
-                        <a href=""><p>View comments (15)</p></a>
-                        <a href=""><p>Read More ...</p></a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

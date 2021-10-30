@@ -8,3 +8,4 @@ app_name = "home"
 urlpatterns = [
     path("", IndexTemplateView.as_view(), name="page"),
 ]
+

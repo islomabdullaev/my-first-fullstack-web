@@ -17,9 +17,10 @@
                     <img src="{% static 'images/apple_company.jpg' %}" alt="" width="100%" height="100%">
                 </div>
                 <div class="col-6">
-                    <p class="ml-5" style="font-size: 35px">Lorem Ipsum dollar sit amet Lorem Ipsum dollar sit amet
-                        Lorem Ipsum dollar sit amet Lorem Ipsum dollar sit amet Lorem Ipsum dollar sit amet Lorem Ipsum
-                        dollar sit amet Lorem Ipsum dollar sit amet Lorem Ipsum dollar sit amet
+                    <p class="ml-5" style="font-size: 35px">Apple was founded by Steve Jobs, Steve Wozniak, and Ronald
+                        Wayne in 1976 to develop and sell Wozniak's Apple I personal computer. It was incorporated by
+                        Jobs and Wozniak as Apple Computer, Inc. in 1977, and sales of its computers, including the
+                        Apple II, grew quickly. It went public in 1980 to instant financial success.
                     </p>
                 </div>
             </div>
@@ -28,9 +29,10 @@
             <h1 style="font-weight: bold; font-size: 50px; font-family: sans-serif">Our office</h1>
             <div class="row">
                 <div class="col-6">
-                    <p style="font-size: 40px">Lorem Ipsum dollar sit amet Lorem Ipsum dollar sit amet
-                        Lorem Ipsum dollar sit amet Lorem Ipsum dollar sit amet Lorem Ipsum dollar sit amet Lorem Ipsum
-                        dollar sit amet Lorem Ipsum dollar sit amet Lorem Ipsum dollar sit amet
+                    <p style="font-size: 40px">Apple Inc. is an American multinational technology company that
+                        specializes in consumer electronics, computer software, and online services. Apple is the
+                        world's largest technology company by revenue (totaling $274.5 billion in 2020) and, since
+                        January 2021, the world's most valuable company.
                     </p>
                 </div>
                 <div class="col-6">
@@ -66,9 +68,9 @@
                         Right Now...</h1>
                     <form method="POST">
                         {% csrf_token %}
-                    <textarea style="border: 5px solid darkgray; height: 200px"
-                              class="form-control pt-5 pb-5 mt-5 w-100"
-                              placeholder="Message" name="about_message"></textarea>
+                        <textarea style="border: 5px solid darkgray; height: 200px"
+                                  class="form-control pt-5 pb-5 mt-5 w-100"
+                                  placeholder="Message" name="about_message"></textarea>
                         <input style="border: 5px solid darkgray" class="form-control mt-2 mb-2 pt-4 pb-4"
                                placeholder="@Email"
                                type="text" name="about_email">

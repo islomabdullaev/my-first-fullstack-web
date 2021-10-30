@@ -1,117 +1,129 @@
 {% load static %}
-{% include 'layouts/header.html' %}
-{% block extra_css %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <link rel="icon" href="{% static 'images/apple_icon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="owlcarousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+          integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    {% block extra_css %}{% endblock %}
     <style>
 
-    html,
-    body {
-        height: 100%;
-        font-family: "Nunito Sans", sans-serif;
-    }
+        html,
+        body {
+            height: 100%;
+            font-family: "Nunito Sans", sans-serif;
+        }
 
-    h1 h2 h3 h4 h5 h6 {
-        font-family: sans-serif;
-    }
+        h1 h2 h3 h4 h5 h6 {
+            font-family: sans-serif;
+        }
 
-    a:hover,
-    a:focus {
-        outline: none;
-        color: blue;
-    }
+        a:hover,
+        a:focus {
+            outline: none;
+            color: blue;
+        }
 
-    h2 {
-        font-size: 55px;
-    }
+        h2 {
+            font-size: 55px;
+        }
 
-    a {
-        font-size: 25px;
-        color: black;
-    }
+        a {
+            font-size: 25px;
+            color: black;
+        }
 
-    ul,
-    ol {
-        padding: 0;
-        margin: 0;
-        list-style-type: none;
-    }
+        ul,
+        ol {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+        }
 
-    .search_items {
-        text-align: center;
-        padding: 15px 0;
-    }
+        .search_items {
+            text-align: center;
+            padding: 15px 0;
+        }
 
-    .product__pagination {
-        padding-top: 25px;
-        text-align: center;
-    }
+        .product__pagination {
+            padding-top: 25px;
+            text-align: center;
+        }
 
-    .product__pagination a {
-        display: inline-block;
-        font-size: 16px;
-        font-weight: 700;
-        color: #111111;
-        height: 30px;
-        width: 30px;
-        border: 1px solid transparent;
-        border-radius: 50%;
-        line-height: 30px;
-        text-align: center;
-    }
+        .product__pagination a {
+            display: inline-block;
+            font-size: 16px;
+            font-weight: 700;
+            color: #111111;
+            height: 30px;
+            width: 30px;
+            border: 1px solid transparent;
+            border-radius: 50%;
+            line-height: 30px;
+            text-align: center;
+        }
 
-    .heart :hover {
-        color: red;
-    }
+        .heart :hover {
+            color: red;
+        }
 
-    .product__pagination a.active {
-        border-color: #111111;
-    }
+        .product__pagination a.active {
+            border-color: #111111;
+        }
 
-    .product__pagination a:hover {
-        border-color: #111111;
-    }
+        .product__pagination a:hover {
+            border-color: #111111;
+        }
 
-    .product__pagination span {
-        display: inline-block;
-        font-size: 16px;
-        font-weight: 700;
-        color: #111111;
-        padding-left: 10px;
-        padding-right: 15px;
-    }
+        .product__pagination span {
+            display: inline-block;
+            font-size: 16px;
+            font-weight: 700;
+            color: #111111;
+            padding-left: 10px;
+            padding-right: 15px;
+        }
 
-    #blog-page h1 {
-        color: orange;
-        padding-top: 15%;
-        padding-bottom: 15%;
-        font-weight: bold;
-        font-size: 100px;
-        font-family: sans-serif;
-        background-image: url({% static 'images/blogg.jpg'%})
-    }
+        #blog-page h1 {
+            color: orange;
+            padding-top: 15%;
+            padding-bottom: 15%;
+            font-weight: bold;
+            font-size: 100px;
+            font-family: sans-serif;
+            background-image: url({% static 'images/blogg.jpg'%})
+        }
 
-    .carousel-inner img {
-        height: 1000px !important;
-    }
-    .bold {
-        font-size: 20px;
-    }
-    #hint_id_username, #hint_id_password1, #hint_id_password2 {
-        display: none;
-    }
-</style>
-{% endblock %}
+        .carousel-inner img {
+            height: 1000px !important;
+        }
+
+        #hint_id_username, #hint_id_password1, #hint_id_password2 {
+            display: none;
+        }
+    </style>
+</head>
 <body>
+{% include 'layouts/header.html' %}
 {% block content %}
 {% endblock %}
 {% include "layouts/footer.html" %}
+
+<script src="{% static 'js/jquery-' %}3.6.0.min.js"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
-<script src="{% static 'js/owl.carousel.min.js' %}"></script>
-<script>
-    $('#myCarousel').on('slide.bs.carousel', function () {
-        // do something…
-    })
-</script>
+<script src="{% static 'js/owl.carousel.js' %}"></script>
+<script src="{% static 'js/main.js' %}3.3.1.min.js"></script>
+<script src="{% static 'js/jquery-' %}3.3.1.min.js"></script>
 {% block extra_js %}
 {% endblock %}
 </body>
+</html>

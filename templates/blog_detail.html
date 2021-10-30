@@ -1,0 +1,65 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+    <div class="container text-center mb-5 mt-5">
+        <h1 style="font-weight: bold; font-size: 50px; font-family: sans-serif;">About {{ object.title }}</h1>
+        <h1>Author: {{ object.author.full_name }}</h1>
+        <img
+                src="{{ object.author.avatar.url }}"
+                class="rounded-circle"
+                style="width: 150px;"
+                alt=""
+        />
+        <div>
+            <img width="50%" src="{{ object.image.url }}" alt="product-image" class="img-thumbnail mt-5">
+        </div>
+    </div>
+    <div class="container comment bg-light">
+        <h1 class="mt-5 mb-5 text-dark text-center bg-light text-light"
+            style="font-weight: bold; font-size: 50px; font-family: sans-serif">Comment
+            Section</h1>
+        {% if object.comments.all %}
+                {% for i in object.comments.all %}
+                    <h1><i class="bi-person-circle"></i> {{ i.name }}</h1>
+                    <div class="row">
+                        <div class="col-6 mt-2"><h6><i class="bi-menu-up"></i> {{ i.comment }}</h6></div>
+                        <div class="col-6 mt-2"><h6><i class="bi-alarm-fill"></i> {{ i.created_at|timesince }} ago</h6>
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+        {% else %}
+            <h5 class="text-center">No comments yet...</h5>
+        {% endif %}
+    </div>
+    <div class="container text-center">
+        <h1 class="mt-5 mb-5 text-secondary bg-light text-dark"
+            style="font-weight: bold; font-size: 50px; font-family: sans-serif">Leave
+            Comment</h1>
+        <form method="POST" action={% url 'blog:comment' pk=object.pk %}>
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-4">
+                    <input style="border: 5px solid darkgray" class="form-control mt-2 mb-2 pt-4 pb-4"
+                           placeholder="Name"
+                           type="text" name="name">
+                </div>
+                <div class="col-4">
+                    <input style="border: 5px solid darkgray" class="form-control mt-2 mb-2 pt-4 pb-4"
+                           placeholder="Phone"
+                           type="text" name="phone">
+                </div>
+                <div class="col-4">
+                    <input style="border: 5px solid darkgray" class="form-control mt-2 mb-2 pt-4 pb-4"
+                           placeholder="Email"
+                           type="text" name="email">
+                </div>
+            </div>
+            <textarea style="border: 5px solid darkgray; height: 200px"
+                      class="form-control pt-5 pb-5 mt-5 w-100"
+                      placeholder="Message" name="comment"></textarea>
+            <button style="background-color: darkgray" type="submit" class="btn btn-success mt-5 mb-5">Post comment
+            </button>
+        </form>
+    </div>
+
+{% endblock %}

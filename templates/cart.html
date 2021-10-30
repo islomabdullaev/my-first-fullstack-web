@@ -1,0 +1,62 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load my_tags %}
+{% block content %}
+    <div style="background-color: ghostwhite" id="about-title" class="p-5">
+        <div class="container p-5">
+            <h1 style="font-weight: bold; font-size: 50px; font-family: sans-serif;">Cart</h1>
+        </div>
+        <div class="container">
+            <div class="row mt-5">
+                {% for i in object_list %}
+                    <div class="col-4 pb-5">
+                        <div class="card" style="width: 18rem; height: 100%">
+                            <img class="card-img-top" src="{{ i.image.url }}" alt="Card image cap" width="100%"
+                                 height="50%">
+                            <div class="card-body">
+                                <a href="{% url 'products:product_detail' pk=i.pk %}"
+                                   class="card-title">{{ i.title }}</a>
+                                {% if i.is_new %}<span class="text-danger"> <i>
+                                    <img width="10%" src="{% static 'images/new.png' %}" alt="">
+                                </i></span>{% endif %}
+                                <p class="card-text">{{ i.short_description }}</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bold">${{ i.price }}{% if i.discount %}<span
+                                        class="text-danger"> %{{ i.discount }}</span>
+                                {% endif %}</li>
+                            </ul>
+                            <div class="card-body">
+                                {% if i|in_wishlist:request.user %}
+                                    <a href="{% url 'products:update-wishlist' pk=i.pk %}?next={{ request.path }}"
+                                       class="heart card-link"><i><img width="10%" src="{% static 'images/heart.png' %}"
+                                                                       alt=""></i></a>
+                                {% else %}
+                                    <a href="{% url 'products:update-wishlist' pk=i.pk %}?next={{ request.path }}"
+                                       class="heart card-link"><i class="bi-heart"></i></a>
+                                {% endif %}
+                                <a href="{% url 'products:update-cart' pk=i.pk %}?next={{ request.path }}"
+                                   class="card-link">
+                                    {% if i|in_cart:request %}
+                                        <i class="bi-cart-x"></i>
+                                    {% else %}
+                                        <i class="bi-cart-plus"></i>
+                                    {% endif %}
+                                </a>
+                                <a href=""
+                                   class="card-link"><i class="bi-star"></i></a><span
+                                    class="bold">{{ i.rate }}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    <div class="container text-center">
+        {% get_cart_info request as cart_info %}
+        <h3>Product items: {{ cart_info.0 }}</h3>
+        <h3>Total: ${{ cart_info.1 }} </h3>
+        <a href="{% url 'accounts:profile' %}" class="btn btn-dark">Place order</a>
+    </div>
+    </div>
+{% endblock %}

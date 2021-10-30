@@ -98,10 +98,14 @@ class ProductModel(models.Model):
         return (timezone.now() - self.created_at).days <= 3
 
     def get_related(self):
-        return self.category.products.order_by("-pk").exclude(pk=self.pk)[:4]
+        return self.category.products.order_by('-pk').exclude(pk=self.pk)[:4]
 
     def __str__(self):
         return self.title
+
+    @staticmethod
+    def get_from_cart(cart):
+        return ProductModel.objects.filter(pk__in=cart)
 
     class Meta:
         verbose_name = _("product")
@@ -110,19 +114,19 @@ class ProductModel(models.Model):
 
 class WishlistModel(models.Model):
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name="wishlist")
-    product = models.ForeignKey(ProductModel, on_delete=models.CASCADE)
+    product = models.ForeignKey(ProductModel, on_delete=models.CASCADE, related_name="wishlist")
 
     def __str__(self):
         return f"{self.user.get_full_name()}| {self.product.title}"
 
-    # @staticmethod
-    # def add_or_delete(user, product):
-    #     try:
-    #         WishlistModel.objects.get(user=user, product=product).delete()
-    #     except WishlistModel.DoesNotExist:
-    #         WishlistModel.objects.create(user=user, product=product)
-    #
-    # class Meta:
-    #     verbose_name = "wishlist"
-    #     verbose_name_plural = "wishlists"
-    #     unique_together = "user", "product",
+    @staticmethod
+    def add_or_delete(user, product):
+        try:
+            WishlistModel.objects.create(user=user, product=product)
+        except IntegrityError:
+            WishlistModel.objects.get(user=user, product=product).delete()
+
+    class Meta:
+        verbose_name = "wishlist"
+        verbose_name_plural = "wishlists"
+        unique_together = "user", "product"
