@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     # other apps
     'crispy_forms',
     'crispy_bootstrap5',
-
 ]
 
 MIDDLEWARE = [
@@ -64,7 +63,9 @@ ROOT_URLCONF = 'djangoProjectFinal_exam.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': [
+            BASE_DIR / 'templates'
+        ]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -147,7 +148,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "static"
 
 STATICFILES_DIRS = BASE_DIR / "assets",
-
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
